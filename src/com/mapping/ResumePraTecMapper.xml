@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapping.ResumePraTecMapper">
+<resultMap id="resumePraTecMap" type="ResumePraTec">
+        <id property="pid" column="AAB401" javaType="java.lang.Integer"></id>
+ 		<result property="pname" column="AAB402" javaType="java.lang.String"></result>
+        <result property="ptime" column="AAB403" javaType="java.lang.String"></result>
+        <result property="psize" column="AAB404" javaType="java.lang.String"></result>
+        <result property="pintr" column="AAB405" javaType="java.lang.String"></result>
+       <association property="res" resultMap="com.mapping.StudentResMapper.studentResMap"/>
+     </resultMap>
+	<!--  parameterType 表示传入数据的数据类型 -->
+	<insert id="addResumePraTec" parameterType="ResumePraTec" useGeneratedKeys="true" keyProperty="AAB401">
+		insert into t_pra_tec_info(AAB201,AAB402,AAB403,AAB404,AAB405) 
+		values(#{res.rid},#{pname},#{ptime},#{psize},#{pintr})
+	</insert>
+	<select id="findByRes" resultMap="resumePraTecMap">
+		select * from t_pra_tec_info where AAB201=#{res.rid}
+	</select>
+	<select id="findByPid" resultMap="resumePraTecMap">
+		select * from  t_pra_tec_info t inner join t_res_stu r on t.AAB301=r.AAB301 where AAB301=#{pid}
+	</select>
+</mapper>

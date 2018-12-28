@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapping.EnterpriseJobMapper">
+<resultMap id="enterpriseJobMap" type="EnterpriseJob">
+        <id property="jid" column="AAC201" javaType="java.lang.Integer"></id>
+ 		<result property="jname" column="AAC202" javaType="java.lang.String"></result>
+        <result property="jdescr" column="AAC203" javaType="java.lang.String"></result>
+        <result property="jnumber" column="AAC204" javaType="java.lang.String"></result>
+        <result property="sday" column="AAC205" jdbcType="TIMESTAMP"></result>
+        <result property="cutday" column="AAC206" jdbcType="TIMESTAMP"></result>
+        <result property="salary" column="AAC207" javaType="java.lang.String"></result>
+        <result property="state" column="AAC208" javaType="java.lang.String"></result>
+        <result property="fday" column="AAC209" jdbcType="TIMESTAMP"></result>
+     	<association property="ent" resultMap="com.mapping.EnterpriseArcMapper.enterpriseArcMap"/>
+    
+        </resultMap>
+	<!--  parameterType 表示传入数据的数据类型 -->
+	<insert id="addEnterpriseJob" parameterType="EnterpriseJob" useGeneratedKeys="true" keyProperty="AAC201">
+		insert into t_ent_job_info(AAC001,AAC202,AAC203,AAC204,AAC205,AAC206,AAC207,
+		AAC208,AAC209) 
+		values(#{ent.eid},#{jname},#{jdescr},#{jnumber},#{sday},#{cutday},#{salary},#{state},#{fday})
+	</insert>
+	
+	<select id="findByEid" resultMap="enterpriseJobMap">
+		select * from  t_ent_job_info  where AAC001=#{eid}
+	</select>
+	
+	<select id="findByJid" resultMap="enterpriseJobMap">
+		select * from  t_ent_job_info  where AAC201=#{jid}
+	</select>
+	<select id="findByState" resultMap="enterpriseJobMap">
+		select * from  t_ent_job_info  where AAC208=#{state}
+	</select>
+	
+</mapper>

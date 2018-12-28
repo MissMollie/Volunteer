@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ <configuration>
+       <typeAliases>
+        <typeAlias alias="User" type="com.model.User"/>
+        <typeAlias alias="StudentArc" type="com.model.StudentArc"/>
+       <typeAlias alias="StudentRes" type="com.model.StudentRes"/>
+       <typeAlias alias="ResumeAddTec" type="com.model.ResumeAddTec"/>
+        <typeAlias alias="ResumePraTec" type="com.model.ResumePraTec"/>
+        <typeAlias alias="EnterpriseArc" type="com.model.EnterpriseArc"/>
+        <typeAlias alias="EnterpriseJob" type="com.model.EnterpriseJob"/>
+        <typeAlias alias="JobRes" type="com.model.JobRes"/>
+        <typeAlias alias="InterView" type="com.model.InterView"/>
+    </typeAliases>
+ 
+ </configuration>

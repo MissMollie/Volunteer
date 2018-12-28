@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapping.ResumeAddTecMapper">
+<resultMap id="resumeAddTecMap" type="ResumeAddTec">
+        <id property="tid" column="AAB301" javaType="java.lang.Integer"></id>
+ 		<result property="tname" column="AAB302" javaType="java.lang.String"></result>
+        <result property="profIn" column="AAB303" javaType="java.lang.String"></result>
+        <result property="gtime" column="AAB304" javaType="java.lang.String"></result>
+        <result property="cert" column="AAB305" javaType="java.lang.String"></result>
+        <result property="ltime" column="AAB306" javaType="java.lang.String"></result>
+       <association property="res" resultMap="com.mapping.StudentResMapper.studentResMap"/>
+     </resultMap>
+	<!--  parameterType 表示传入数据的数据类型 -->
+	<insert id="addResumeAddTec" parameterType="ResumeAddTec" useGeneratedKeys="true" keyProperty="AAB301">
+		insert into t_add_tec_info(AAB201,AAB302,AAB303,AAB304,AAB305,AAB306) 
+		values(#{res.rid},#{tname},#{profIn},#{gtime},#{cert},#{ltime})
+	</insert>
+	<select id="findByRes" resultMap="resumeAddTecMap">
+		select * from t_add_tec_info where AAB201=#{res.rid}
+	</select>
+	<select id="findByTid" resultMap="resumeAddTecMap">
+		select * from  t_add_tec_info t inner join t_res_stu r on t.AAB301=r.AAB301 where AAB301=#{tid}
+	</select>
+</mapper>

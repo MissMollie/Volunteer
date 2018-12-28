@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapping.StudentResMapper">
+<resultMap id="studentResMap" type="StudentRes">
+        <id property="rid" column="AAB201" javaType="java.lang.Integer"></id>
+ 		<result property="rname" column="AAB202" javaType="java.lang.String"></result>
+        <result property="picture" column="AAB203" javaType="java.lang.String"></result>
+        <result property="rdirection" column="AAB204" javaType="java.lang.String"></result>
+        <result property="state" column="AAB205" javaType="java.lang.String"></result>
+        <association property="stu" resultMap="com.mapping.StudentArcMapper.studentArcMap"/>
+     </resultMap>
+	<!--  parameterType 表示传入数据的数据类型 -->
+	<insert id="addStudentRes" parameterType="StudentRes" useGeneratedKeys="true" keyProperty="AAB201">
+		insert into t_res_stu_info(AAB001,AAB202,AAB203,AAB204,AAB205) 
+		values(#{stu.sid},#{rname},#{picture},#{rdirection},#{state})
+	</insert>
+	<select id="findByStu" resultMap="studentResMap">
+	select * from t_res_stu_info where AAB001=#{sid}
+	</select>
+	<select id="findByRid" resultMap="studentResMap">
+		select * from t_res_stu_info r inner join t_arc_stu_info a on r.AAB001=a.AAB001 where AAB201=#{rid}
+	</select>
+</mapper>

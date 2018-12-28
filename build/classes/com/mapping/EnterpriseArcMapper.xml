@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapping.EnterpriseArcMapper">
+<resultMap id="enterpriseArcMap" type="EnterpriseArc">
+        <id property="eid" column="AAC001" javaType="java.lang.Integer"></id>
+ 		<result property="code" column="AAC002" javaType="java.lang.String"></result>
+        <result property="name" column="AAC003" javaType="java.lang.String"></result>
+        <result property="address" column="AAC004" javaType="java.lang.String"></result>
+        <result property="zip" column="AAC005" javaType="java.lang.String"></result>
+        <result property="telName" column="AAC006" javaType="java.lang.String"></result>
+        <result property="tel" column="AAC007" javaType="java.lang.String"></result>
+        <result property="telState" column="AAC008" javaType="java.lang.String"></result>
+        <result property="scale" column="AAC019" javaType="java.lang.String"></result>
+     	<result property="industry" column="AAC009" javaType="java.lang.String"></result>
+        <result property="econCategorie" column="AAC010" javaType="java.lang.String"></result>
+        <result property="state" column="AAC011" javaType="java.lang.String"></result>
+       	<result property="dataSource" column="AAC013" javaType="java.lang.String"></result>
+     	<result property="systemEntry" column="AAC014" javaType="java.lang.String"></result>
+        <result property="seTime" column="AAC015" jdbcType="TIMESTAMP"></result>
+        <result property="introduction" column="AAC016" javaType="java.lang.String"></result>
+        <result property="reviewer" column="AAC017" javaType="java.lang.String"></result>
+        <result property="revTime" column="AAC018" jdbcType="TIMESTAMP"></result>   
+      
+        </resultMap>
+	<!--  parameterType 表示传入数据的数据类型 -->
+	<insert id="addEnterpriseArc" parameterType="EnterpriseArc" useGeneratedKeys="true" keyProperty="AAC001">
+		insert into t_arc_ent_info(AAC002,AAC003,AAC004,AAC005,AAC006,AAC007,
+		AAC008,AAC019,AAC009,AAC010,AAC011,AAC013,AAC016) 
+		values(#{code},#{name},#{address},#{zip},#{telName},#{tel},#{telState},
+		#{scale},#{industry},#{econCategorie}
+		,#{state},#{dataSource},#{introduction})
+	</insert>
+	
+	<update id="updateEnterpriseArc" parameterType="EnterpriseArc">
+		update t_arc_ent_info set AAC002=#{code},AAC003=#{name},AAC004=#{address},AAC005=#{zip},
+		AAC006=#{telName},AAC007=#{tel},AAC008=#{telState},AAC019=#{scale},AAC009=#{industry},
+		AAC010=#{econCategorie},AAC016=#{introduction} where AAC001=#{eid}
+	</update>
+	
+	<select id="findByEid" resultMap="enterpriseArcMap">
+		select * from  t_arc_ent_info where AAC001=#{eid} 
+	</select>
+	
+	<select id="findByCode" resultMap="enterpriseArcMap">
+		select * from  t_arc_ent_info  where AAC002=#{code}
+	</select>
+</mapper>
