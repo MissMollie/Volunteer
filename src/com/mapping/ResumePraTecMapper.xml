@@ -7,7 +7,7 @@
         <result property="ptime" column="AAB403" javaType="java.lang.String"></result>
         <result property="psize" column="AAB404" javaType="java.lang.String"></result>
         <result property="pintr" column="AAB405" javaType="java.lang.String"></result>
-       <association property="res" resultMap="com.mapping.StudentResMapper.studentResMap"/>
+       <association property="res"  column="AAB201" select="com.mapping.StudentResMapper.findByRid"/>
      </resultMap>
 	<!--  parameterType 表示传入数据的数据类型 -->
 	<insert id="addResumePraTec" parameterType="ResumePraTec" useGeneratedKeys="true" keyProperty="AAB401">
@@ -19,5 +19,8 @@
 	</select>
 	<select id="findByPid" resultMap="resumePraTecMap">
 		select * from  t_pra_tec_info t inner join t_res_stu r on t.AAB301=r.AAB301 where AAB301=#{pid}
+	</select>
+	<select id="findByRid" resultMap="resumePraTecMap">
+		select * from  t_pra_tec_info where AAB201=#{rid}
 	</select>
 </mapper>

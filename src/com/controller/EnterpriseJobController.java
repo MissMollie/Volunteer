@@ -36,18 +36,17 @@ public class EnterpriseJobController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
 	}
 
-
+    //（组织端）组织发布活动招募：发布时间是通过提交不取得当前时间，eid取得session对象中的
 	@RequestMapping(value="/enterpriseJobAdd.do",method=RequestMethod.POST)
-
 	public ModelAndView add(EnterpriseJob enterpriseJob) {
 		ModelAndView mv=new ModelAndView();
-		Date d=new Date();
-		enterpriseJob.setFday(d);
-		EnterpriseArc ent=(EnterpriseArc) session.getAttribute("enterpriseArc");
-		
+		//Date d=new Date();
+		//enterpriseJob.setFday(d);//发布时间取当前执行时间也可以，但有表单中有输入框了，所以没用
+		enterpriseJob.setState("1");
+		EnterpriseArc ent=(EnterpriseArc) session.getAttribute("enterpriseArc");		
 		enterpriseJob.setEnt(ent);
 		enterpriseJobService.addEnterpriseJob(enterpriseJob);
-		mv.setViewName("enterprise");
+		mv.setViewName("default");
 		return mv;
 	}
 

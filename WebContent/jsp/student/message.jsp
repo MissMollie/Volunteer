@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>message</title>
 </head>
 <body>
    提示：${message } 
-<a href="${pageContext.request.contextPath }/Index.jsp"><b>点此返回</b></a>
+<a href="${pageContext.request.contextPath }/jsp/default.jsp"><b>点此返回</b></a>
 </body>
 </html>

@@ -6,21 +6,28 @@
  		<result property="jname" column="AAC202" javaType="java.lang.String"></result>
         <result property="jdescr" column="AAC203" javaType="java.lang.String"></result>
         <result property="jnumber" column="AAC204" javaType="java.lang.String"></result>
-        <result property="sday" column="AAC205" jdbcType="TIMESTAMP"></result>
+         <result property="salary" column="AAC205" javaType="java.lang.String"></result>     
         <result property="cutday" column="AAC206" jdbcType="TIMESTAMP"></result>
-        <result property="salary" column="AAC207" javaType="java.lang.String"></result>
-        <result property="state" column="AAC208" javaType="java.lang.String"></result>
-        <result property="fday" column="AAC209" jdbcType="TIMESTAMP"></result>
-     	<association property="ent" resultMap="com.mapping.EnterpriseArcMapper.enterpriseArcMap"/>
-    
+         <result property="jpromulgator" column="AAC207" javaType="java.lang.String"></result>
+        <result property="fday" column="AAC208" jdbcType="TIMESTAMP"></result>    
+        <result property="jleader" column="AAC209" javaType="java.lang.String"></result>
+         <result property="jleadertel" column="AAC210" javaType="java.lang.String"></result>   
+        <result property="state" column="AAC211" javaType="java.lang.String"></result> 	
+     	<association property="ent" column="AAC001" 
+     		select="com.mapping.EnterpriseArcMapper.findByEid"/>
+     	<collection property="res" column="AAC201" javaType="ArrayList" ofType="JobRes"
+      	select="com.mapping.JobResMapper.findByJid"
+      />
         </resultMap>
+        
 	<!--  parameterType 表示传入数据的数据类型 -->
 	<insert id="addEnterpriseJob" parameterType="EnterpriseJob" useGeneratedKeys="true" keyProperty="AAC201">
 		insert into t_ent_job_info(AAC001,AAC202,AAC203,AAC204,AAC205,AAC206,AAC207,
-		AAC208,AAC209) 
-		values(#{ent.eid},#{jname},#{jdescr},#{jnumber},#{sday},#{cutday},#{salary},#{state},#{fday})
+		AAC208,AAC209,AAC210,AAC211) 
+		values(#{ent.eid},#{jname},#{jdescr},#{jnumber},#{salary},#{cutday},#{jpromulgator},#{fday},#{jleader},#{jleadertel},#{state})
 	</insert>
 	
+	<!-- 在活动表中根据eid查询某组织的所有活动 ，形成集合给组织对象-->
 	<select id="findByEid" resultMap="enterpriseJobMap">
 		select * from  t_ent_job_info  where AAC001=#{eid}
 	</select>
@@ -29,7 +36,8 @@
 		select * from  t_ent_job_info  where AAC201=#{jid}
 	</select>
 	<select id="findByState" resultMap="enterpriseJobMap">
-		select * from  t_ent_job_info  where AAC208=#{state}
+	<!-- 	select * from  t_ent_job_info  where AAC211=#{state} //不根据状态查活动，所有都查 -->
+	select * from  t_ent_job_info  
 	</select>
 	
 </mapper>

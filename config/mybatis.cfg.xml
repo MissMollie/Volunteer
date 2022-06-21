@@ -10,6 +10,7 @@
         <typeAlias alias="EnterpriseArc" type="com.model.EnterpriseArc"/>
         <typeAlias alias="EnterpriseJob" type="com.model.EnterpriseJob"/>
         <typeAlias alias="JobRes" type="com.model.JobRes"/>
+        <typeAlias alias="JobReport" type="com.model.JobReport"/>
         <typeAlias alias="InterView" type="com.model.InterView"/>
     </typeAliases>
  

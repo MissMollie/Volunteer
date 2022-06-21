@@ -1,11 +1,5 @@
 @charset "UTF-8";
-#header {
-    background-color:black;
-    color:white;
-    
-    padding:5px;
-    height:15%
-}
+
 #nav {
     line-height:30px;
     background-color:#eeeeee;

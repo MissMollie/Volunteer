@@ -22,12 +22,15 @@ public class EnterpriseJobService {
 		return enterpriseJobMapper.findByEid(eid);
 	}
 	
-	public List<EnterpriseJob> findByJid(int jid){
+	public EnterpriseJob findByJid(int jid){
 		return enterpriseJobMapper.findByJid(jid);
 	}
 	
-	public List<EnterpriseJob> findByState(String state){
+	/*public List<EnterpriseJob> findByState(String state){
 		return enterpriseJobMapper.findByState(state);
+	}*/
+	//不根据状态查活动，所有都查
+	public List<EnterpriseJob> findByState(){
+		return enterpriseJobMapper.findByState();
 	}
-
 }

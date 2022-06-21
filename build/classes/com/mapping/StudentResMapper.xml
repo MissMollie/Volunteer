@@ -7,7 +7,13 @@
         <result property="picture" column="AAB203" javaType="java.lang.String"></result>
         <result property="rdirection" column="AAB204" javaType="java.lang.String"></result>
         <result property="state" column="AAB205" javaType="java.lang.String"></result>
-        <association property="stu" resultMap="com.mapping.StudentArcMapper.studentArcMap"/>
+        <association property="stu" column="AAB001" select="com.mapping.StudentArcMapper.findBySid"/>    	     	
+    	 <collection property="add" column="AAB201" javaType="ArrayList" ofType="ResumeAddTec"
+      	select="com.mapping.ResumeAddTecMapper.findByRid"
+        />       
+      <collection property="pra" column="AAB201" javaType="ArrayList" ofType="ResumePraTec"
+      	select="com.mapping.ResumePraTecMapper.findByRid"
+       />
      </resultMap>
 	<!--  parameterType 表示传入数据的数据类型 -->
 	<insert id="addStudentRes" parameterType="StudentRes" useGeneratedKeys="true" keyProperty="AAB201">
@@ -17,7 +23,14 @@
 	<select id="findByStu" resultMap="studentResMap">
 	select * from t_res_stu_info where AAB001=#{sid}
 	</select>
+	<select id="findBySid" resultMap="studentResMap">
+	select * from t_res_stu_info where AAB001=#{sid}
+	</select>
 	<select id="findByRid" resultMap="studentResMap">
 		select * from t_res_stu_info r inner join t_arc_stu_info a on r.AAB001=a.AAB001 where AAB201=#{rid}
+	</select>
+	
+	<select id="getList" resultMap="studentResMap">
+		select * from t_res_stu_info  where AAB201=#{rid} and AAB205='1'
 	</select>
 </mapper>

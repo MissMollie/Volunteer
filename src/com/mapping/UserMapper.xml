@@ -23,11 +23,17 @@
 	</update>
 	
 	<select id="findByNameAndPassword" resultMap="userMap">
-	 select * from t_sys_user where SAA002=#{username} and SAA003=#{password}
+	 select * from t_sys_user where SAA002=#{username} and SAA003=#{password} and SAA007=#{role}
 	</select>
 	
 	<select id="findByName" resultMap="userMap">
 	select * from t_sys_user where SAA002=#{username} 
 	</select>
-	
+	<select id="findByRole" resultMap="userMap">
+	   select * from t_sys_user where SAA007=3 or SAA007=4
+	</select>
+	<update id="update"  parameterType="user">
+	update t_sys_user set SAA002=#{username},SAA003=#{password},SAA004=#{name},AAB007=#{role}	
+		where SAA001=#{uid}
+	</update>
 </mapper>

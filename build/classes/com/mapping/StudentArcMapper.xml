@@ -12,45 +12,46 @@
         <result property="political" column="AAB008" javaType="java.lang.String"></result>
      	 <result property="edu" column="AAB009" javaType="java.lang.String"></result>
         <result property="tel" column="AAB010" javaType="java.lang.String"></result>
-        <result property="email" column="AAB011" javaType="java.lang.String"></result>
-        <result property="schoolmail" column="AAB012" javaType="java.lang.String"></result>
-        <result property="schoolZip" column="AAB028" javaType="java.lang.String"></result>
-        <result property="nativePlace" column="AAB013" javaType="java.lang.String"></result>
-         <result property="natZip" column="AAB029" javaType="java.lang.String"></result>
-        <result property="address" column="AAB014" javaType="java.lang.String"></result>
-        <result property="addZip" column="AAB030" javaType="java.lang.String"></result>
-        <result property="department" column="AAB015" javaType="java.lang.String"></result>
-        <result property="professional" column="AAB016" javaType="java.lang.String"></result>
-        <result property="secPro" column="AAB017" javaType="java.lang.String"></result>
-       <result property="reward" column="AAB018" javaType="java.lang.String"></result>
-        <result property="punishment" column="AAB019" javaType="java.lang.String"></result>
-        <result property="hobby" column="AAB020" javaType="java.lang.String"></result>
-       <result property="state" column="AAB021" javaType="java.lang.String"></result>
-        <result property="dataSource" column="AAB023" javaType="java.lang.String"></result>
-        <result property="operator" column="AAB024" javaType="java.lang.String"></result>
-       <result property="operTime" column="AAB025"  jdbcType="TIMESTAMP"></result>
-        <result property="reviewer" column="AAB026" javaType="java.lang.String"></result>
-        <result property="revTime" column="AAB027"  jdbcType="TIMESTAMP"></result>
-       
+        <result property="email" column="AAB011" javaType="java.lang.String"></result>     
+        <result property="address" column="AAB012" javaType="java.lang.String"></result>      
+        <result property="department" column="AAB013" javaType="java.lang.String"></result>
+        <result property="professional" column="AAB014" javaType="java.lang.String"></result>
+       <result property="state" column="AAB015" javaType="java.lang.String"></result>     
+        <result property="reviewer" column="AAB016" javaType="java.lang.String"></result>
+        <result property="revTime" column="AAB017"  jdbcType="TIMESTAMP"></result>
+       <collection property="job" column="AAB001" javaType="ArrayList" ofType="JobRes"
+      	select="com.mapping.JobResMapper.findBySid"
+      />
+       <collection property="rep" column="AAB001" javaType="ArrayList" ofType="JobReport"
+      	select="com.mapping.JobReportMapper.findBySid"
+      />
+      <collection property="view" column="AAB001" javaType="ArrayList" ofType="InterView"
+      	select="com.mapping.InterViewMapper.findBySid"
+      />
+      <collection property="viewNo" column="AAB001" javaType="ArrayList" ofType="InterView"
+      	select="com.mapping.InterViewMapper.findBySidNo"
+      />
+      <collection property="resList" column="AAB001" javaType="ArrayList" ofType="StudentRes"
+      	select="com.mapping.StudentResMapper.findBySid"
+      />
      </resultMap>
 	<!--  parameterType 表示传入数据的数据类型 -->
 	<insert id="addStudentArc" parameterType="StudentArc" useGeneratedKeys="true" keyProperty="AAB001">
-		insert into t_arc_stu_info (AAB002,AAB003,AAB004,AAB005,AAB006,AAB007,AAB008,AAB009
-		,AAB010,AAB011,AAB012,AAB028,AAB013,AAB029,AAB014,AAB030,AAB015,AAB016,AAB017
-		,AAB018,AAB019,AAB020,AAB021,AAB023)
-		values(#{name},#{studentId},#{idCard},#{sex},#{national},#{birthday},#{political},#{edu},#{tel}
-		,#{email},#{schoolmail},#{schoolZip},#{nativePlace},#{natZip},#{address},#{addZip},#{department},#{professional},#{secPro}
-		,#{reward},#{punishment},#{hobby},#{state},#{dataSource})
+		insert into t_arc_stu_info (AAB002,AAB003,AAB004,AAB005,AAB006,AAB007,AAB008,AAB009,AAB010,AAB011,AAB012,AAB013,AAB014,AAB015)
+		values(#{name},#{studentId},#{idCard},#{sex},#{national},#{birthday},#{political},#{edu},#{tel},#{email},#{address},#{department},#{professional},#{state})
 	</insert>
 	<update id="update"  parameterType="StudentArc">
 	update t_arc_stu_info set AAB002=#{name},AAB003=#{studentId},AAB004=#{idCard},AAB005=#{sex},
 	AAB006=#{national},AAB007=#{birthday},AAB008=#{political},AAB009=#{edu}
-		,AAB010=#{tel},AAB011=#{email},AAB012=#{schoolmail},AAB028=#{schoolZip},AAB013=#{nativePlace},AAB029=#{natZip},
-		AAB014=#{address},AAB030=#{addZip},AAB015=#{department},AAB016=#{professional},AAB017=#{secPro}
-		,AAB018=#{reward},AAB019=#{punishment},AAB020=#{hobby},AAB021=#{state},AAB023=#{dataSource}
+		,AAB010=#{tel},AAB011=#{email},AAB012=#{address},AAB013=#{department},AAB014=#{professional},AAB015=#{state}
 		where AAB001=#{sid}
 	</update>
-	
+	<update id="updateState" parameterType="StudentArc">
+	 update t_arc_stu_info set AAB015=#{state} where AAB001=#{sid}
+	</update>
+	<update id="audit" parameterType="StudentArc">
+	 update t_arc_stu_info set AAB015=#{state},AAB016=#{reviewer},AAB017=#{revTime} where AAB001=#{sid}
+	</update>
 		<select id="findBystudentId" resultMap="studentArcMap">
 		select * from t_arc_stu_info where AAB003=#{studentId} 
 		</select>
@@ -58,7 +59,14 @@
 		<select id="findBySid" resultMap="studentArcMap">
 		select * from t_arc_stu_info where AAB001=#{sid} 
 		</select>
+		<select id="findAll" resultMap="studentArcMap">
+		select * from t_arc_stu_info where AAB015='1' or AAB015='2'
+		</select>
 	<select id="findByState" resultMap="studentArcMap">
-	select * from t_arc_stu_info where AAB021=#{state} 
+	   select * from t_arc_stu_info where AAB015=#{state} 
+	</select>
+	
+	<select id="findByStateToUser" resultMap="studentArcMap">
+	   select * from t_arc_stu_info where AAB015='2' or AAB015='3' 
 	</select>
 </mapper>

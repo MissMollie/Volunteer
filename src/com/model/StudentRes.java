@@ -1,12 +1,31 @@
 package com.model;
 
-public class StudentRes {//简历信息表
-	private int rid;//简历流水号
+import java.util.List;
+
+public class StudentRes {//报名表信息表
+	private int rid;//报名表流水号
 	private StudentArc stu;//学生流水号
-	private String rname;//简历名称
-	private String picture;//照片
-	private String rdirection;//应聘方向
-	private String state;//简历状态 1=有效 2=作废
+	private String rname;//申请人姓名
+	private String picture;//联系方式
+	private String rdirection;//志愿意向
+	private String state;//报名表状态 1=有效 2=作废
+	private List<ResumeAddTec> add;// 个人发展情况
+	private List<ResumePraTec> pra;// 志愿服务情况表
+	
+	
+	
+	public List<ResumeAddTec> getAdd() {
+		return add;
+	}
+	public void setAdd(List<ResumeAddTec> add) {
+		this.add = add;
+	}
+	public List<ResumePraTec> getPra() {
+		return pra;
+	}
+	public void setPra(List<ResumePraTec> pra) {
+		this.pra = pra;
+	}
 	public int getRid() {
 		return rid;
 	}

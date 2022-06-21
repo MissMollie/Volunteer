@@ -1,11 +1,14 @@
 package com.model;
 
-public class JobRes {//岗位简历表
-	 private int jid;//投递流水号
-	 private StudentRes res;//简历流水号
-	 private StudentArc stu;//学生流水号
-	 private EnterpriseJob job;//岗位流水号
-	 private String state;//投递状态（1.已投递2.已取消，在企业未发面试邀约前可取消）
+import java.util.List;
+
+public class JobRes {//活动申请表//活动申请表中只有两个属性，其他都是集合
+	 private int jid;//申请流水号	
+	 private String state;//申请状态（1.已申请2.已取消，在组织未发邀请前可取消）
+	
+	 private StudentRes res;//报名表对象
+	 private StudentArc stu;//学生对象
+	 private EnterpriseJob job;//活动对象
 	public int getJid() {
 		return jid;
 	}

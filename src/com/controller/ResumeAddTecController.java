@@ -21,15 +21,20 @@ public class ResumeAddTecController {
 		@Autowired
 	    private HttpSession session;
 		
+		
+		//（学生端）学生申请表个人发展情况填写，跳转到下一步志愿服务情况表
 		@RequestMapping(value="/resumeAddTecInsert.do",method=RequestMethod.POST)
 		public ModelAndView insert(ResumeAddTec resumeAddTec) {
 			ModelAndView mv=new ModelAndView();
 			StudentRes res=(StudentRes) session.getAttribute("studentRes");
 			resumeAddTec.setRes(res);
 			resumeAddTecService.insert(resumeAddTec);
-			mv.setViewName("student/registerPra");
+			mv.setViewName("student/StuAppForm_Practice");
 			return mv;
 		}
+		
+		
+		//未实现功能：想实现申请表中个人发展情况与志愿服务情况与申请人的一对多关系
 		@RequestMapping(value="/resumeAddTecFindById.do",method=RequestMethod.POST)
 		public ModelAndView findById(int tid) {
 			ModelAndView mv=new ModelAndView();

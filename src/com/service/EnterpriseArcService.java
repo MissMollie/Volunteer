@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,11 +22,22 @@ public class EnterpriseArcService {
 		return enterpriseArcMapper.findByEid(eid);
 	}
 	
-	public EnterpriseArc findByCode(String code) {
+	public List<EnterpriseArc> findByCode(String code) {
 		return enterpriseArcMapper.findByCode(code);
 	}
 	
 	public void update(EnterpriseArc enterpriseArc) {
 		enterpriseArcMapper.updateEnterpriseArc(enterpriseArc);
+	}
+	
+	public List<EnterpriseArc> findByState(String state){
+		return enterpriseArcMapper.findByState(state);
+	} 
+	
+	public List<EnterpriseArc> findAll(){
+		return  enterpriseArcMapper.findAll();
+	}
+	public void audit(EnterpriseArc enterpriseArc) {
+		enterpriseArcMapper.audit(enterpriseArc);
 	}
 }

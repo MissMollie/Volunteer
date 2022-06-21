@@ -1,5 +1,7 @@
 package com.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +18,7 @@ public class StudentArcService {
 			studentArcMapper.addStudentArc(studentArc);
 		}
 		
-		public StudentArc findBystudentId(String studentId) {
+		public List<StudentArc> findBystudentId(String studentId) {
 			 return studentArcMapper.findBystudentId(studentId);
 		}
 		
@@ -26,5 +28,20 @@ public class StudentArcService {
 		
 		public void update(StudentArc studentArc) {
 			 studentArcMapper.update(studentArc);
+		}
+		public List<StudentArc> findByState(String state) {
+			return  studentArcMapper.findByState(state);
+		}
+		public List<StudentArc> findByStateToUser() {
+			return  studentArcMapper.findByStateToUser();
+		}
+		public List<StudentArc> findAll(){
+			return studentArcMapper.findAll();
+		}
+		public void audit(StudentArc studentArc) {
+			studentArcMapper.audit(studentArc);
+		}
+		public void updateState(StudentArc studentArc) {
+			studentArcMapper.updateState(studentArc);
 		}
 }

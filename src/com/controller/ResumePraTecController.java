@@ -24,16 +24,21 @@ public class ResumePraTecController {
 		@Autowired
 	    private HttpSession session;
 		
+		
+		//（学生端）学生申请表志愿服务情况填写，申请表填写完毕
 		@RequestMapping(value="/resumePraTecInsert.do",method=RequestMethod.POST)
 		public ModelAndView insert(ResumePraTec resumePraTec) {
 			ModelAndView mv=new ModelAndView();
 			StudentRes res=(StudentRes) session.getAttribute("studentRes");
 			resumePraTec.setRes(res);
 			resumePraTecService.insert(resumePraTec);
-			mv.addObject("message", "简历相关信息表已填写完毕！！");
+			mv.addObject("message", "申请表相关信息已填写完毕！！");
 			mv.setViewName("student/message");
 			return mv;
 		}
+		
+		
+		//未实现功能：想实现申请表中个人发展情况与志愿服务情况与申请人的一对多关系
 		@RequestMapping(value="/resumePraTecFindById.do",method=RequestMethod.POST)
 		public ModelAndView findById(int pid) {
 			ModelAndView mv=new ModelAndView();

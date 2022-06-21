@@ -2,15 +2,16 @@ package com.model;
 
 import java.util.Date;
 
-public class InterView {//面试邀约表
-		private int vid;//邀约流水号
-		private EnterpriseArc ent;//企业流水号
+public class InterView {//志愿者申请状况表
+		private int vid;//志愿者申请状况流水号		
+		private String state;//申请状态 1.组织已通过申请2.组织拒绝该申请3.志愿者接受4.志愿者拒绝
+		private String detail;//组织留言
+		private Date stime;//组织处理时间（筛选申请者）
+		private Date btime;//志愿者确认回函时间（可以参加也可以不参加）	
+		//都是对象，数据库表中只存了id
+		private EnterpriseArc ent;//组织流水号
 		private StudentArc stu;//学生流水号
-		private EnterpriseJob ejob;//岗位流水号
-		private String state;//邀约状态 1=已发出 2=接受 3=拒绝
-		private String detail;//邀约详情
-		private Date stime;//发出时间
-		private Date btime;//回函时间
+		private EnterpriseJob ejob;//志愿活动流水号
 		public int getVid() {
 			return vid;
 		}

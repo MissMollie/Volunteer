@@ -2,8 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapping.JobResMapper">
 <resultMap id="jobResMap" type="JobRes">
+	<id property="jid" column="BCC001" javaType="java.lang.Integer"></id>
+	<result property="state" column="BCC002" javaType="java.lang.String"></result>
+	<association property="res" resultMap="com.mapping.StudentResMapper.studentResMap"/>
+	 <association property="stu" resultMap="com.mapping.StudentArcMapper.studentArcMap"/>
+     <association property="job" resultMap="com.mapping.EnterpriseJobMapper.enterpriseJobMap"/>  
 	
 </resultMap>
-
+<insert id="addJobRes" parameterType="JobRes" useGeneratedKeys="true" keyProperty="BCC001">
+	insert into t_job_res (AAB201,AAB001,AAC201,BCC002) values(#{res.rid},#{stu.sid},#{job.jid},#{state})
+</insert>
+	<select id="findByJidAndSid" resultMap="jobResMap">
+	select * from t_job_res where  AAC201=#{jid} and AAB001=#{sid}
+	</select>
+	
+	<select id="findByJid" resultMap="jobResMap">
+	select * from t_job_res where AAC201=#{jid}
+	</select>
+	
+	<select id="findBySid" resultMap="jobResMap">
+	select * from t_job_res where AAB001=#{sid}
+	</select>
+	
 
 </mapper>

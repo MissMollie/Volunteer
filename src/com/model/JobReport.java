@@ -2,17 +2,16 @@ package com.model;
 
 import java.util.Date;
 
-public class JobReport {//就业报告表
+public class JobReport {//社会实践报告表
 	private int jid;//报告流水号
 	private StudentArc stu;//学生流水号
-	private String entName;//就业企业名称
-	private String entSize;//就业企业规模（1=0-50,2=50-100,3=100-500,4=500以上）
-	private String industry;//所属行业
-	private String jobName;//岗位名称
-	private String salary;//薪资范围
-	private Date arrtime;//到岗日期
-	private String note;//备注
+	private String entName;//志愿组织名称
+	private String entSize;//组织规模（1=0-20,2=20-100,3=100-150,4=150以上）
+	private String industry;//志愿类别
+	private String jobName;//志愿活动主题
+	private String salary;//活动地点
 	private Date  reptime;//该报告生成时间
+	private String state;//报告状态0.待认证1.学校认证通过2.学校认证不通过
 	public int getJid() {
 		return jid;
 	}
@@ -55,24 +54,20 @@ public class JobReport {//就业报告表
 	public void setSalary(String salary) {
 		this.salary = salary;
 	}
-	public Date getArrtime() {
-		return arrtime;
-	}
-	public void setArrtime(Date arrtime) {
-		this.arrtime = arrtime;
-	}
-	public String getNote() {
-		return note;
-	}
-	public void setNote(String note) {
-		this.note = note;
-	}
+	
 	public Date getReptime() {
 		return reptime;
 	}
 	public void setReptime(Date reptime) {
 		this.reptime = reptime;
 	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	
 	
 }
 

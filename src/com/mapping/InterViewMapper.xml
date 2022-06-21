@@ -2,8 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapping.InterViewMapper">
 <resultMap id="interViewMap" type="InterView">
+<id property="vid" column="BCC201" javaType="java.lang.Integer"></id>
+ 		<result property="state" column="BCC202" javaType="java.lang.String"></result>
+        <result property="detail" column="BCC203" javaType="java.lang.String"></result>
+ 		<result property="stime" column="BCC204" jdbcType="TIMESTAMP"></result>
+ 		<result property="btime" column="BCC205" jdbcType="TIMESTAMP"></result>
+        <association property="ent" column="AAC001" 
+     		select="com.mapping.EnterpriseArcMapper.findByEid"/>
+     	<association property="stu" column="AAB001" 
+     		select="com.mapping.StudentArcMapper.findBySid"/>
+     	<association property="ejob" column="AAC201" 
+     		select="com.mapping.EnterpriseJobMapper.findByJid"/>
+     
 	
 </resultMap>
 
+	<insert id="addInterView" parameterType="InterView" useGeneratedKeys="true" keyProperty="BCC201">
+	insert into t_interview (BCC202,BCC203,BCC204,AAC001,AAB001,AAC201) values(#{state},#{detail},#{stime},#{ent.eid},#{stu.sid},#{ejob.jid})
+	</insert>
+	
+	<select id="findByVid" resultMap="interViewMap">
+	select * from t_interview where BCC201=#{vid}
+	</select>
+	
+	<!-- 通过的申请 :确认参加的也是通过的-->
+	<select id="findBySid" resultMap="interViewMap">
+	select * from t_interview where AAB001=#{sid} and (BCC202='1' or BCC202='3' or BCC202='4')
+	</select>
+	
+	<select id="findBySidNo" resultMap="interViewMap">
+	select * from t_interview where AAB001=#{sid} and BCC202='2'
+	</select> 
+	
+	<select id="findByEid" resultMap="interViewMap">
+	select * from t_interview where AAC001=#{eid} and ( BCC202='3'or BCC202='4')
+	</select>
+	
+	<update id="updateBtime" parameterType="InterView">
+		update t_interview set BCC205=#{btime} where BCC201=#{vid}
+	</update>
+	
+	<update id="updateState" parameterType="InterView">
+		update t_interview set BCC202=#{state} where BCC201=#{vid}
+	</update>
 
 </mapper>

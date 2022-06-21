@@ -1,12 +1,12 @@
 package com.model;
 
-public class ResumePraTec {//简历表下的     技能实践表
-	private int  pid;//实践流水号
-	private StudentRes res;//简历流水号
-	private String pname;//实践名称
-	private String ptime;//实践周期
-	private String psize;//实践规模
-	private String pintr;//实践简介
+public class ResumePraTec {//报名表表下的   志愿服务情况表
+	private int  pid;//志愿服务流水号
+	private StudentRes res;//报名表流水号
+	private String pname;//志愿服务经历
+	private String ptime;//志愿服务时长
+	private String psize;//志愿服务人群
+	private String pintr;//服务内容简介
 	public int getPid() {
 		return pid;
 	}

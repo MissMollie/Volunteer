@@ -2,14 +2,13 @@ package com.model;
 
 import com.model.StudentRes;
 
-public class ResumeAddTec {//简历表的    附加技术信息表
-	private int tid;//技术流水号
-	private StudentRes res;//简历流水号
-	private String tname;//技术名称
-	private String profIn;//熟练程度 1=入门 2=熟练 3=精通
-	private String gtime;//掌握时间 掌握了多长时间该技术 （以月为单位）
-	private String cert;//资质证书
-	private String ltime;//最后应用时间 
+public class ResumeAddTec {//报名表表的    个人发展情况表
+	private int tid;//发展情况流水号
+	private StudentRes res;//报名表流水号
+	private String tname;//兴趣爱好爱好
+	private String profIn;//专业特长 
+	private String gtime;//个人履历
+	private String cert;//获奖情况
 	public int getTid() {
 		return tid;
 	}
@@ -46,11 +45,6 @@ public class ResumeAddTec {//简历表的    附加技术信息表
 	public void setCert(String cert) {
 		this.cert = cert;
 	}
-	public String getLtime() {
-		return ltime;
-	}
-	public void setLtime(String ltime) {
-		this.ltime = ltime;
-	}
+
 	
 }
